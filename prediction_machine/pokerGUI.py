@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
-from data_generation.trainingbot import DummyBot
+from ..data_generation.trainingbot import DummyBot, Hand
 from perceptron import Perceptron
 import pandas as pd
 import numpy as np
