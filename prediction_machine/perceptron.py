@@ -5,16 +5,17 @@ import pickle
 from sklearn import metrics
 import os
 
+current_directory = os.path.dirname(os.path.abspath(__file__))
 def main():
     perceptrons = [Perceptron(max_iter=100000, eta0=0.25, early_stopping=False, random_state=50), #preflop
     Perceptron(max_iter=100000, eta0=0.25, early_stopping=False, random_state=30), #flop
     Perceptron(max_iter=100000, eta0=0.25, early_stopping=False, random_state=50), #turn
     Perceptron(max_iter=100000, eta0=0.25, early_stopping=False, random_state=50)] #river
     #train machines automatically with assumed data files
-    dfs = [pd.read_csv("data_generation/preflop.csv"),
-    pd.read_csv("data_generation/flop.csv"),
-    pd.read_csv("data_generation/turn.csv"),
-    pd.read_csv("data_generation/river.csv")]
+    dfs = [pd.read_csv(os.path.join(current_directory, "data_generation/preflop.csv")),
+    pd.read_csv(os.path.join(current_directory, "data_generation/flop.csv")),
+    pd.read_csv(os.path.join(current_directory, "data_generation/turn.csv")),
+    pd.read_csv(os.path.join(current_directory, "data_generation/river.csv"))]
 
     x_y_data = []
 
@@ -34,7 +35,6 @@ def main():
         
 
 def save_perceptrons(perceptrons, filename="perceptronObjects"):
-    current_directory = os.path.dirname(os.path.abspath(__file__))
     
     file_path = os.path.join(current_directory, filename)
     with open(file_path, 'wb') as f:

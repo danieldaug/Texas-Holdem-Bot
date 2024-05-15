@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
-from ..data_generation.trainingbot import DummyBot, Hand
+from data_generation.trainingbot import DummyBot, Hand
 from perceptron import Perceptron
 import pandas as pd
 import numpy as np
@@ -205,11 +205,13 @@ def get_card_name(card):
 # Function to load perceptrons from a file
 def load_perceptrons(filename="perceptronObjects"):
     try:
-        with open(filename, 'rb') as f:
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(current_directory, "perceptronObjects")
+        with open(file_path, 'rb') as f:
             perceptrons = pickle.load(f)
         return perceptrons
     except FileNotFoundError:
-        messagebox.showerror("Error", f"Perceptrons file '{filename}' not found. Please train perceptrons first.")
+        messagebox.showerror("Error", f"Perceptrons file '{file_path}' not found. Please train perceptrons first.")
         raise SystemExit(1)  # Exit application gracefully
     except Exception as e:
         messagebox.showerror("Error", f"Error loading perceptrons: {str(e)}")
